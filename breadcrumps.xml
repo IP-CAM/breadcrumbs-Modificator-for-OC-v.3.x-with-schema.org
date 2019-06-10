@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>breadcrumps</name>
+  <version>3.0</version>
+  <author>Yuriy</author>
+  <link></link>
+  <code>breadcrumps modificator for oc3 with schema.org and non-linked last breadcrump</code>
+  <file path="catalog/view/theme/default/template/*/*.twig">
+    <operation>
+      <search><![CDATA[
+        <ul class="breadcrumb">
+      ]]></search>
+      <add position="replace" offset="4"><![CDATA[
+        <ul class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+          {% for breadcrumb in breadcrumbs %}
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+             {% if loop.last %}
+                <span itemprop="name">{{ breadcrumb.text }}</span>
+                <meta itemprop="position" content="{{ loop.index }}">
+             {% else %}
+               <a itemprop="item" href="{{ breadcrumb.href }}">
+                <span itemprop="name">{{ breadcrumb.text }}</span>
+                <meta itemprop="position" content="{{ loop.index }}">
+              </a>
+             {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      ]]></add>
+    </operation>
+  </file>
+</modification>
