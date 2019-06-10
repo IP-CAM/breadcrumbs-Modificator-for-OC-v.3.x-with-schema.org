@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modification>
   <name>breadcrumps</name>
-  <version>3.0</version>
+  <version>4.0</version>
   <author>Yuriy</author>
   <link>https://github.com/scred666/breadcrumps</link>
   <code>breadcrumps modificator for oc3 with schema.org and non-linked last breadcrump</code>
@@ -15,8 +15,10 @@
           {% for breadcrumb in breadcrumbs %}
             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
              {% if loop.last %}
-                <span itemprop="name">{{ breadcrumb.text }}</span>
-                <meta itemprop="position" content="{{ loop.index }}">
+                <span itemprop="item">
+                  <span itemprop="name">{{ breadcrumb.text }}</span>
+                  <meta itemprop="position" content="{{ loop.index }}">
+                </span>
              {% else %}
                <a itemprop="item" href="{{ breadcrumb.href }}">
                 <span itemprop="name">{{ breadcrumb.text }}</span>
